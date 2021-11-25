@@ -1,6 +1,5 @@
 package com.nullnumber1.servlets;
 
-import com.nullnumber1.model.Clock;
 import com.nullnumber1.model.Point;
 import com.nullnumber1.model.Results;
 import org.json.JSONObject;
@@ -55,19 +54,16 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     private Point getPoint(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Clock clock = new Clock();
-        clock.start();
         double x = Double.parseDouble(req.getParameter("X_field"));
         double y = Double.parseDouble(req.getParameter("Y_field"));
         double r = Double.parseDouble(req.getParameter("R_field"));
         Point point = new Point(x, y, r);
         point.setResult(isAreaHit(x, y, r));
-        point.setClock(clock);
         if (!isValid(x, y, r)) {
             getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
             point.setValid(false);
         }
-        clock.finish();
+        point.setTime();
         return point;
     }
 

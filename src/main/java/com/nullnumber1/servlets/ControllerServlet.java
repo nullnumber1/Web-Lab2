@@ -24,9 +24,6 @@ public class ControllerServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             System.out.println(e.getClass());
             getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-        } catch (Error error) {
-            error.printStackTrace();
-            System.out.println("Error");
         }
     }
 

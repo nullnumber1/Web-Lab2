@@ -1,3 +1,5 @@
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html style="height: 100%">
 <head>
@@ -38,7 +40,11 @@
             <jsp:getProperty name="check" property="result"/>
         </th>
         <th>
-            <%=check.getClock().getDateString()%>
+            <%
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+                Date date = new Date(check.getTime());
+            %>
+            <%=simpleDateFormat.format(date)%>
         </th>
     </tr>
     </tbody>

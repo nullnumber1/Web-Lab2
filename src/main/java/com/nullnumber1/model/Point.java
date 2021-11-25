@@ -1,12 +1,15 @@
 package com.nullnumber1.model;
 
+import java.util.concurrent.TimeUnit;
+
 public class Point implements Comparable<Point> {
     private final double x;
     private final double y;
     private final double r;
     private boolean result;
     private boolean valid;
-    private Clock clock;
+    private Long time;
+    private Long start;
 
     public Point(double x, double y, double r) {
         this.x = x;
@@ -35,12 +38,12 @@ public class Point implements Comparable<Point> {
         this.result = result;
     }
 
-    public Clock getClock() {
-        return clock;
+    public Long getTime() {
+        return time;
     }
 
-    public void setClock(Clock clock) {
-        this.clock = clock;
+    public void setTime(){
+        this.time = System.currentTimeMillis() - start;
     }
 
     public boolean isValid() {
@@ -53,6 +56,6 @@ public class Point implements Comparable<Point> {
 
     @Override
     public int compareTo(Point o) {
-        return o.clock.compareTo(clock);
+        return o.getTime().compareTo(time);
     }
 }

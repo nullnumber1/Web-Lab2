@@ -1,4 +1,6 @@
 <%@ page import="com.nullnumber1.model.Point" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table class="result_table table table-hover table-dark">
     <jsp:useBean id="results" class="com.nullnumber1.model.Results" scope="application"/>
@@ -25,7 +27,12 @@
         </th>
         <th class='the_Result' style='color:<%=(check.getResult() ? "lime" : "red")%>'><%=check.getResult()%>
         </th>
-        <th><%=check.getClock().getDateString()%>
+        <th>
+            <%
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+                Date date = new Date(check.getTime());
+            %>
+            <%=simpleDateFormat.format(date)%>
         </th>
     </tr>
     <%
