@@ -40,11 +40,7 @@
             <jsp:getProperty name="check" property="result"/>
         </th>
         <th>
-            <%
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
-                Date date = new Date(check.getTime());
-            %>
-            <%=simpleDateFormat.format(date)%>
+            <%=check.getTime()%>
         </th>
     </tr>
     </tbody>

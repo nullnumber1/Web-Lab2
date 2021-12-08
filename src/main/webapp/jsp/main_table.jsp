@@ -2,7 +2,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<table class="result_table table table-hover table-dark">
+<table class="result_table table table-hover table-dark" id="res_table">
     <jsp:useBean id="results" class="com.nullnumber1.model.Results" scope="application"/>
     <thead>
     <tr>
@@ -27,12 +27,8 @@
         </th>
         <th class='the_Result' style='color:<%=(check.getResult() ? "lime" : "red")%>'><%=check.getResult()%>
         </th>
-        <th>
-            <%
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
-                Date date = new Date(check.getTime());
-            %>
-            <%=simpleDateFormat.format(date)%>
+        <th class='the_Time'>
+            <%=check.getTime()%>
         </th>
     </tr>
     <%

@@ -1,14 +1,20 @@
+<%@ page import="com.nullnumber1.model.Point" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html style="height: 100%">
 <head>
     <meta charset="UTF-8">
     <title>Web Lab №2</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
     <script src="scripts/canvas_handler.js"></script>
     <script src="scripts/validator.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 </head>
 <body onload="drawCanvas()">
 <header>
@@ -62,11 +68,45 @@
             </div>
             <input type="hidden" name="R_field" id="R_field">
         </div>
-        <button type="submit" id="submitButton" class="btn btn-dark">Отправить</button>
+        <button type="submit" id="submitButton" class="btn btn-dark my-2">Отправить</button>
     </form>
 </div>
-<div class="container-md">
-    <jsp:include page="jsp/main_table.jsp"/>
+<div class="container-md" id="table_container">
+    <table class="result_table table table-hover table-dark" id="res_table">
+        <jsp:useBean id="results" class="com.nullnumber1.model.Results" scope="application"/>
+        <thead>
+        <tr>
+            <th class="variable">X</th>
+            <th class="variable">Y</th>
+            <th class="variable">R</th>
+            <th>Result</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            if (results != null) {
+                for (Point check : results.getPoints()) {
+        %>
+        <tr>
+            <th class='the_X'><%=check.getX()%>
+            </th>
+            <th class='the_Y'><%=check.getY()%>
+            </th>
+            <th class='the_R'><%=check.getR()%>
+            </th>
+            <th class='the_Result' style='color:<%=(check.getResult() ? "lime" : "red")%>'><%=check.getResult()%>
+            </th>
+            <th class='the_Time'>
+                <%=check.getTime()%>
+            </th>
+        </tr>
+        <%
+                }
+            }
+        %>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

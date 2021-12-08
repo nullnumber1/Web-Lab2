@@ -1,5 +1,7 @@
 package com.nullnumber1.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Point implements Comparable<Point> {
@@ -8,8 +10,7 @@ public class Point implements Comparable<Point> {
     private final double r;
     private boolean result;
     private boolean valid;
-    private Long time;
-    private Long start;
+    private String time;
 
     public Point(double x, double y, double r) {
         this.x = x;
@@ -38,12 +39,11 @@ public class Point implements Comparable<Point> {
         this.result = result;
     }
 
-    public Long getTime() {
+    public String getTime() {
         return time;
     }
-
     public void setTime(){
-        this.time = System.currentTimeMillis() - start;
+        this.time = new SimpleDateFormat("hh:mm:ss").format(new Date(System.currentTimeMillis()));
     }
 
     public boolean isValid() {
